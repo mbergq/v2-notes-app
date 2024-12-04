@@ -1,5 +1,6 @@
 import React from "react";
 import Note from "../../src/Note";
+import App from "../../src/App";
 
 const data = {
   notes: [
@@ -15,7 +16,20 @@ const data = {
 
 describe("Note.cy.tsx", () => {
   it("renders data and has correct id value", () => {
-    cy.mount(<Note data={data} />);
+    cy.intercept(
+      {
+        method: "GET",
+        url: "/api/notes",
+      },
+      {
+        fixture: "notes.json",
+      }
+    ).as("getNotes");
+
+    cy.mount(<App />);
+
+    cy.wait("@getNotes");
+
     cy.get("[data-cy=note-wrapper]").should("have.id", data.notes[0].id);
     cy.contains("Test note title").should("be.visible");
     cy.contains("Lorem ipsum blablablabla").should("be.visible");
@@ -26,4 +40,3 @@ describe("Note.cy.tsx", () => {
     cy.contains("button", "Delete");
   });
 });
-// });
