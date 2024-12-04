@@ -14,7 +14,7 @@ const data = {
 };
 
 describe("Note.cy.tsx", () => {
-  it("renders data and has correct background id value", () => {
+  it("renders data and has correct id value", () => {
     cy.mount(<Note data={data} />);
     cy.get("[data-cy=note-wrapper]").should("have.id", data.notes[0].id);
     cy.contains("Test note title").should("be.visible");
@@ -23,7 +23,7 @@ describe("Note.cy.tsx", () => {
   it("has a delete button", () => {
     cy.mount(<Note data={data} />);
 
-    cy.contains("button", "X");
+    cy.contains("button", "Delete");
   });
 });
 // });
