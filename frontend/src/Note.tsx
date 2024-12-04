@@ -11,7 +11,21 @@ type Props = {
 };
 
 function Note({ data }: Props) {
-  return <div data-cy="note-wrapper" id={data.notes[0].id}></div>;
+  console.log(data);
+  return (
+    <>
+      {data &&
+        data.notes.map((note) => {
+          return (
+            <div data-cy="note-wrapper" id={note.id}>
+              <p>{note.id}</p>
+              <p>{note.title}</p>
+              <p>{note.content}</p>
+            </div>
+          );
+        })}
+    </>
+  );
 }
 
 export default Note;
