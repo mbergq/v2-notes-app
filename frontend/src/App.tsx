@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+// import Note from "./Note";
 interface Data {
   notes: [
     {
@@ -38,6 +38,7 @@ function App() {
     <>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       {data !== null && data.notes[0].content}
+      {/* <Note /> */}
     </>
   );
 }
