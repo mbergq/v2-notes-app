@@ -16,10 +16,7 @@ const data = {
 describe("Note.cy.tsx", () => {
   it("renders data and has correct background id value", () => {
     cy.mount(<Note data={data} />);
-    cy.get("[data-cy=bgId]").should(
-      "have.text",
-      data.notes[0].background_color_id
-    );
+    cy.get("[data-cy=note-wrapper]").should("have.id", data.notes[0].id);
     cy.contains("Test note title").should("be.visible");
     cy.contains("Lorem ipsum blablablabla").should("be.visible");
   });
