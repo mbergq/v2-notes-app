@@ -13,10 +13,8 @@ const data = {
   ],
 };
 
-const colorIndex = [1, 2, 3, 4, 5];
-
 describe("Note.cy.tsx", () => {
-  it("renders with correct color id", () => {
+  it("renders data and has correct background id value", () => {
     cy.mount(<Note data={data} />);
     cy.get("[data-cy=bgId]").should(
       "have.text",
@@ -24,6 +22,11 @@ describe("Note.cy.tsx", () => {
     );
     cy.contains("Test note title").should("be.visible");
     cy.contains("Lorem ipsum blablablabla").should("be.visible");
+  });
+  it("has a delete button", () => {
+    cy.mount(<Note data={data} />);
+
+    cy.contains("button", "X");
   });
 });
 // });
