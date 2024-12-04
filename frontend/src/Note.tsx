@@ -11,7 +11,7 @@ type Props = {
 };
 
 function Note({ data }: Props) {
-  return <div>My note component</div>;
+  return <div data-cy="note-wrapper" id={data.notes[0].id}></div>;
 }
 
 export default Note;
