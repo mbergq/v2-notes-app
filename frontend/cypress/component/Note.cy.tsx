@@ -16,18 +16,14 @@ const data = {
 const colorIndex = [1, 2, 3, 4, 5];
 
 describe("Note.cy.tsx", () => {
-  // it("renders with correct color-id", () => {
-  // note.map((n) => {
-  //   cy.mount(<Note />);
-  //   cy.contains("Test note title").should("be.visible");
-  //   cy.contains("Lorem ipsum blablablabla").should("be.visible");
-  //   cy.contains(1 | 2 | 3 | 4 | 5).should("be.visible");
-  // });
-  // cy.mount(<Note />);
-  colorIndex.forEach((index) => {
-    it("renders with correct color id", () => {
-      cy.mount(<Note data={data} />);
-    });
+  it("renders with correct color id", () => {
+    cy.mount(<Note data={data} />);
+    cy.get("[data-cy=bgId]").should(
+      "have.text",
+      data.notes[0].background_color_id
+    );
+    cy.contains("Test note title").should("be.visible");
+    cy.contains("Lorem ipsum blablablabla").should("be.visible");
   });
 });
 // });
