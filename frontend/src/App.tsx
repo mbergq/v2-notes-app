@@ -36,8 +36,11 @@ function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      {data !== null && <Note data={data} />}
+      <div className="h-24 border-b">Dashboard</div>
+      <div className="min-h-dvh h-full flex">
+        <div className="min-h-dvh h-full w-44 border-r">Note tools</div>
+        {data !== null && <Note data={data} />}
+      </div>
     </>
   );
 }
