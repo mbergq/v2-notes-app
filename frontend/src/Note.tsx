@@ -11,7 +11,6 @@ type Props = {
 };
 
 function Note({ data }: Props) {
-  console.log(data);
   return (
     <>
       {data &&
