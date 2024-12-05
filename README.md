@@ -14,3 +14,9 @@ Wed 4 Dec
 
 Worked on implementing my first component through "TDD". Managed to get my
 first test green.
+
+Thu 5 Dec
+
+I've added styling to set the foundation for further components and functions. Also
+added colorthemes based on numbers via Tailwind. These ID's will enable me to set
+correct color based on received data from the backend.
