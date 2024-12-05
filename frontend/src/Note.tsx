@@ -20,7 +20,7 @@ function Note({ data }: Props) {
               data-cy="note-wrapper"
               id={note.id}
               key={note.id}
-              className="border-2 min-h-72 h-fit p-4 w-72 ml-6 mt-6"
+              className="border-2 min-h-72 h-fit p-4 w-72 ml-6 mt-6 bg-2"
             >
               <button>Delete</button>
               <h1 className="text-xl">{note.title}</h1>
