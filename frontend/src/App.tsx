@@ -40,7 +40,9 @@ function App() {
       <div className="min-h-dvh h-full flex">
         <div className="min-h-dvh h-full w-44 border-r-2 flex flex-col">
           <div className="h-full ml-4 mt-4">
-            <button className="border-2 border-sky-600 w-fit p-1">new</button>
+            <button className="border-2 border-sky-600 w-fit p-1 text-xl">
+              new
+            </button>
           </div>
         </div>
         {data !== null && <Note data={data} />}
