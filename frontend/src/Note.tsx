@@ -17,8 +17,8 @@ function Note({ data }: Props) {
       {data &&
         data.notes.map((note) => {
           return (
-            <div data-cy="note-wrapper" id={note.id}>
-              <p>{note.id}</p>
+            <div data-cy="note-wrapper" id={note.id} key={note.id}>
+              <button>Delete</button>
               <p>{note.title}</p>
               <p>{note.content}</p>
             </div>
