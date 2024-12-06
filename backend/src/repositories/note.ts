@@ -10,7 +10,7 @@ export const getNotes = async (req: Request, res: Response) => {
         id: noteTable.id,
         title: noteTable.title,
         content: noteTable.content,
-        background_color_id: noteTable.background_color_id,
+        color: noteTable.color,
         created_at: noteTable.created_at,
       })
       .from(noteTable)
