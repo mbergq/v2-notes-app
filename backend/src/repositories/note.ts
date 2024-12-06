@@ -23,3 +23,17 @@ export const getNotes = async (req: Request, res: Response) => {
       .json({ error: "server_error", message: "Internal server error" });
   }
 };
+
+type AddNote = typeof noteTable.$inferInsert;
+
+export const addNote = async (req: Request, res: Response) => {
+  const body: AddNote = req.body;
+  try {
+    await db.insert(noteTable).values(body);
+    return res.status(200).json({ message: "Note was succesfully added" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "server_error", message: "Internal server error" });
+  }
+};
