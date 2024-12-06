@@ -70,7 +70,7 @@ function NoteModal() {
             type="textarea"
             defaultValue="content"
             {...register("content")}
-            className="h-60 mt-2"
+            className="h-60"
           />
           <button type="submit">Submit</button>
         </form>

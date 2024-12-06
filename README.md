@@ -20,3 +20,9 @@ Thu 5 Dec
 I've added styling to set the foundation for further components and functions. Also
 added colorthemes based on numbers via Tailwind. These ID's will enable me to set
 correct color based on received data from the backend.
+
+Fri 6 Dec
+
+Edited table row of color to use an enum with 5 different colors, will use these
+later for customization of notes. Added post functionality to the api and started
+to implement the modal / form where notes will be added.
