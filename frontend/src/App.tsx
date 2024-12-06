@@ -14,6 +14,7 @@ interface Data {
 
 function App() {
   const [data, setData] = useState<null | Data>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -24,7 +25,6 @@ function App() {
       const result = await response.json();
 
       setData(result);
-      // console.log(result);
     } catch (error) {
       console.error(error);
     }
@@ -40,9 +40,13 @@ function App() {
       <div className="min-h-dvh h-full flex bg-main">
         <div className="min-h-dvh h-full w-44 border-r-2 border-r-border flex flex-col">
           <div className="h-full ml-4 mt-4">
-            <button className="border-2 border-border border-sky-600 w-fit p-1 text-xl">
+            <button
+              onClick={() => setIsVisible(!isVisible)}
+              className="border-2 border-border border-sky-600 w-fit p-1 text-xl"
+            >
               new
             </button>
+            {isVisible && <p>Modal</p>}
           </div>
         </div>
         {data !== null && <Note data={data} />}
