@@ -36,11 +36,11 @@ function App() {
 
   return (
     <>
-      <div className="h-24 border-b-2 bg-main">Dashboard</div>
+      <div className="h-24 border-b-2 border-b-border bg-main">Dashboard</div>
       <div className="min-h-dvh h-full flex bg-main">
-        <div className="min-h-dvh h-full w-44 border-r-2 flex flex-col">
+        <div className="min-h-dvh h-full w-44 border-r-2 border-r-border flex flex-col">
           <div className="h-full ml-4 mt-4">
-            <button className="border-2 border-sky-600 w-fit p-1 text-xl">
+            <button className="border-2 border-border border-sky-600 w-fit p-1 text-xl">
               new
             </button>
           </div>
