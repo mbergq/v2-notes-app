@@ -1,11 +1,11 @@
 {
-  "id": "583bf92c-cca2-4e2e-804c-219b28e79ba3",
+  "id": "ccbedde3-9398-4e3d-90f7-28db353c8b12",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.users": {
-      "name": "users",
+    "public.note": {
+      "name": "note",
       "schema": "",
       "columns": {
         "id": {
@@ -27,26 +27,34 @@
           "primaryKey": false,
           "notNull": true
         },
-        "background_color_id": {
-          "name": "background_color_id",
-          "type": "integer",
+        "color": {
+          "name": "color",
+          "type": "color",
+          "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_title_unique": {
-          "name": "users_title_unique",
+        "note_title_unique": {
+          "name": "note_title_unique",
           "nullsNotDistinct": false,
           "columns": [
             "title"
           ]
         },
-        "users_content_unique": {
-          "name": "users_content_unique",
+        "note_content_unique": {
+          "name": "note_content_unique",
           "nullsNotDistinct": false,
           "columns": [
             "content"
@@ -58,7 +66,19 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.color": {
+      "name": "color",
+      "schema": "public",
+      "values": [
+        "green",
+        "lightpurple",
+        "red",
+        "darkpurple",
+        "yellow"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},

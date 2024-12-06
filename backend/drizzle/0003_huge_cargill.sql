@@ -1,1 +1,0 @@
-ALTER TABLE "note" RENAME COLUMN "background_color_id" TO "color";

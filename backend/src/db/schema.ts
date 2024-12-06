@@ -7,7 +7,7 @@ import {
   pgEnum,
 } from "drizzle-orm/pg-core";
 
-const colorsEnum = pgEnum("colors", [
+export const colorEnum = pgEnum("color", [
   "green",
   "lightpurple",
   "red",
@@ -19,6 +19,6 @@ export const noteTable = pgTable("note", {
   id: uuid().defaultRandom().primaryKey(),
   title: varchar({ length: 80 }).notNull().unique(),
   content: varchar({ length: 1000 }).notNull().unique(),
-  color: colorsEnum(),
+  color: colorEnum(),
   created_at: timestamp().defaultNow(),
 });
