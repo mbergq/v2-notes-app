@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Note from "./Note";
+import NoteModal from "./components/NoteModal";
 interface Data {
   notes: [
     {
@@ -36,21 +37,27 @@ function App() {
 
   return (
     <>
-      <div className="h-24 border-b-2 border-b-border bg-main">Dashboard</div>
-      <div className="min-h-dvh h-full flex bg-main">
-        <div className="min-h-dvh h-full w-44 border-r-2 border-r-border flex flex-col">
+      {/* <div className="h-24 border-b-2 border-b-gray bg-main">Dashboard</div> */}
+      <div
+        className={`min-h-dvh h-full flex bg-main ${isVisible && "opacity-40"}`}
+      >
+        <div className="min-h-dvh h-full w-44 border-r-2 border-r-gray flex flex-col">
           <div className="h-full ml-4 mt-4">
             <button
               onClick={() => setIsVisible(!isVisible)}
-              className="border-2 border-border border-sky-600 w-fit p-1 text-xl"
+              className="border-2 border-gray w-fit p-1 text-xl text-gray"
             >
               new
             </button>
-            {isVisible && <p>Modal</p>}
           </div>
         </div>
         {data !== null && <Note data={data} />}
       </div>
+      {isVisible && (
+        <div className="fixed w-full h-full top-0 left-0 flex-1 justify-center items-center">
+          <NoteModal />
+        </div>
+      )}
     </>
   );
 }
