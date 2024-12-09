@@ -1,11 +1,11 @@
-import {
-  integer,
-  pgTable,
-  varchar,
-  uuid,
-  timestamp,
-  pgEnum,
-} from "drizzle-orm/pg-core";
+import { pgTable, varchar, uuid, timestamp, pgEnum } from "drizzle-orm/pg-core";
+
+export const categoryEnum = pgEnum("category", ["shopping", "to-do", "study"]);
+
+export const categoryTable = pgTable("category", {
+  id: uuid().defaultRandom().primaryKey(),
+  name: categoryEnum(),
+});
 
 export const colorEnum = pgEnum("color", [
   "green",
@@ -20,5 +20,6 @@ export const noteTable = pgTable("note", {
   title: varchar({ length: 80 }).notNull().unique(),
   content: varchar({ length: 1000 }).notNull().unique(),
   color: colorEnum(),
+  categoryId: uuid("category_id").references(() => categoryTable.id),
   created_at: timestamp().defaultNow(),
 });
