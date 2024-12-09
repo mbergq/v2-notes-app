@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import Note from "./Note";
 import NoteModal from "./components/NoteModal";
+
 interface Data {
   notes: [
     {
       id: string;
       title: string;
       content: string;
-      background_color_id: number;
+      color: string;
       created_at: string;
     }
   ];
@@ -24,7 +25,6 @@ function App() {
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
-
       setData(result);
     } catch (error) {
       console.error(error);
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      {/* <div className="h-24 border-b-2 border-b-gray bg-main">Dashboard</div> */}
+      <div className="h-24 border-b-2 border-b-gray bg-main">Dashboard</div>
       <div
         className={`min-h-dvh h-full flex bg-main ${isVisible && "opacity-40"}`}
       >
@@ -51,7 +51,11 @@ function App() {
             </button>
           </div>
         </div>
-        {data !== null && <Note data={data} />}
+        {data !== null && (
+          <div className="grid grid-cols-3 grid-rows-3">
+            <Note data={data} />
+          </div>
+        )}
       </div>
       {isVisible && (
         <div className="fixed w-full h-full top-0 left-0 flex-1 justify-center items-center">
