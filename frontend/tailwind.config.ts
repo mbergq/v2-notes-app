@@ -4,7 +4,7 @@ export default {
   theme: {
     colors: {
       main: "#E5E4E2",
-      border: "#36454F",
+      gray: "#36454F",
       green: "#d6ffe9",
       lightpurple: "#bbc2e2",
       red: "#de6c83",
