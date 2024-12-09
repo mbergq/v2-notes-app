@@ -30,7 +30,7 @@ function Note({ data }: Props) {
               id={note.id}
               key={note.id}
               className={
-                "border-2 border-gray min-h-72 h-fit p-4 ml-6 mt-6 rounded-md"
+                "border-2 border-gray min-h-72 w-64 h-fit p-4 ml-6 mt-6 rounded-md"
               }
               style={{ backgroundColor: backgroundColor }}
             >

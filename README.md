@@ -26,3 +26,10 @@ Fri 6 Dec
 Edited table row of color to use an enum with 5 different colors, will use these
 later for customization of notes. Added post functionality to the api and started
 to implement the modal / form where notes will be added.
+
+Mon 9 Dec
+
+Added a lot of styling and App now imports the NoteModal so it can be used. Added
+functionality so that the modal works well. Post requests are working as intended.
+Added a new category table to be able to filter notes on specific
+categories in the future. Soon ready to start implementing a lot of tests.

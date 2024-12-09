@@ -37,6 +37,7 @@ function App() {
 
   const handleClick = () => {
     setIsVisible(!isVisible);
+    fetchData();
   };
 
   return (
