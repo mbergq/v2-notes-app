@@ -37,7 +37,7 @@ function NoteModal() {
 
   return (
     <div className="min-h-dvh h-full flex justify-center items-center">
-      <div className="w-2/3 h-fit bg-main border-2 border-gray rounded-md">
+      <div className="w-1/3 h-fit bg-main border-2 border-gray rounded-md">
         <form
           method="post"
           onSubmit={handleSubmit(onSubmit)}
