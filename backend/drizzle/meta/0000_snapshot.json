@@ -1,9 +1,36 @@
 {
-  "id": "ccbedde3-9398-4e3d-90f7-28db353c8b12",
+  "id": "3f39b29d-ce7a-438a-bd90-8d6355c45ccd",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.category": {
+      "name": "category",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "category_names",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.note": {
       "name": "note",
       "schema": "",
@@ -34,6 +61,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "category_id": {
+          "name": "category_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -43,7 +76,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "note_category_id_category_id_fk": {
+          "name": "note_category_id_category_id_fk",
+          "tableFrom": "note",
+          "tableTo": "category",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "note_title_unique": {
@@ -67,6 +114,15 @@
     }
   },
   "enums": {
+    "public.category_names": {
+      "name": "category_names",
+      "schema": "public",
+      "values": [
+        "shopping",
+        "to-do",
+        "study"
+      ]
+    },
     "public.color": {
       "name": "color",
       "schema": "public",
