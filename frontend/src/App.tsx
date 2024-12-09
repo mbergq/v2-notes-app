@@ -35,6 +35,10 @@ function App() {
     fetchData();
   }, []);
 
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <>
       <div className="h-24 border-b-2 border-b-gray bg-main">Dashboard</div>
@@ -44,7 +48,7 @@ function App() {
         <div className="min-h-dvh h-full w-44 border-r-2 border-r-gray flex flex-col">
           <div className="h-full ml-4 mt-4">
             <button
-              onClick={() => setIsVisible(!isVisible)}
+              onClick={handleClick}
               className="border-2 border-gray w-fit p-1 text-xl text-gray"
             >
               new
@@ -59,7 +63,7 @@ function App() {
       </div>
       {isVisible && (
         <div className="fixed w-full h-full top-0 left-0 flex-1 justify-center items-center">
-          <NoteModal />
+          <NoteModal onClick={handleClick} />
         </div>
       )}
     </>

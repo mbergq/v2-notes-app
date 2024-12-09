@@ -1,12 +1,16 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 
+type Props = {
+  onClick: () => void;
+};
+
 type FormInputs = {
   title: string;
   content: string;
   color: string;
 };
 
-function NoteModal() {
+function NoteModal({ onClick }: Props) {
   const {
     register,
     handleSubmit,
@@ -43,7 +47,9 @@ function NoteModal() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col my-4 mx-4"
         >
-          <button className="self-end mr-1 text-gray">X</button>
+          <button onClick={onClick} className="self-end mr-1 text-gray">
+            X
+          </button>
           <input
             defaultValue="title.."
             {...register("title")}
