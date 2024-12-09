@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { XCircle } from "react-feather";
 
 type Props = {
   onClick: () => void;
@@ -47,11 +48,11 @@ function NoteModal({ onClick }: Props) {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col my-4 mx-4"
         >
-          <button onClick={onClick} className="self-end mr-1 text-gray">
-            X
+          <button onClick={onClick} className="self-end text-gray">
+            <XCircle color="grey" size={28} />
           </button>
+
           <input
-            defaultValue="title.."
             {...register("title")}
             className="w-fit rounded-sm text-gray"
           />
