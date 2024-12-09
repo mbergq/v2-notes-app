@@ -13,7 +13,27 @@ function NoteModal() {
     watch,
     formState: { errors },
   } = useForm<FormInputs>();
-  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    const restructuredObject = {
+      title: data.title,
+      content: data.content,
+      color: data.color,
+    };
+
+    try {
+      const response = await fetch(`/api/add-note`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(restructuredObject),
+      });
+      // fetchData();
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="min-h-dvh h-full flex justify-center items-center">
@@ -25,7 +45,7 @@ function NoteModal() {
         >
           <button className="self-end mr-1 text-gray">X</button>
           <input
-            defaultValue="Title.."
+            defaultValue="title.."
             {...register("title")}
             className="w-fit rounded-sm text-gray"
           />
@@ -68,11 +88,11 @@ function NoteModal() {
           </div>
           <textarea
             {...register("content")}
-            className="h-60 mb-5 resize-none rounded-md"
+            className="h-60 mb-5 resize-none rounded-md text-gray"
           />
           <button
             type="submit"
-            className="border w-fit p-2 self-start text-sm text-gray"
+            className="border w-fit p-2 self-start text-sm text-gray rounded-sm"
           >
             Add note
           </button>
