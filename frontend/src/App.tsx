@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import Note from "./Note";
 import NoteModal from "./components/NoteModal";
 
-interface Data {
-  notes: [
-    {
-      id: string;
-      title: string;
-      content: string;
-      color: string;
-      created_at: string;
-    }
-  ];
-}
+type Data = [
+  {
+    id: string;
+    title: string;
+    content: string;
+    color: string;
+    created_at: string;
+  }
+];
 
 function App() {
   const [data, setData] = useState<null | Data>(null);
@@ -25,6 +23,8 @@ function App() {
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
+      // console.log(result);
+
       setData(result);
     } catch (error) {
       console.error(error);

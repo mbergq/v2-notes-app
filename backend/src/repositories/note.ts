@@ -1,27 +1,21 @@
 import { type Request, type Response } from "express";
-import { desc } from "drizzle-orm";
-import { noteTable } from "../db/schema";
+import { desc, eq } from "drizzle-orm";
+import { categoryTable, noteTable } from "../db/schema";
 import { db } from "../index";
 
-export const getNotes = async (req: Request, res: Response) => {
-  try {
-    const notes = await db
-      .select({
-        id: noteTable.id,
-        title: noteTable.title,
-        content: noteTable.content,
-        color: noteTable.color,
-        created_at: noteTable.created_at,
-      })
-      .from(noteTable)
-      .orderBy(desc(noteTable.created_at));
+export const getNotes = async () => {
+  const notes = await db
+    .select({
+      id: noteTable.id,
+      title: noteTable.title,
+      content: noteTable.content,
+      color: noteTable.color,
+      created_at: noteTable.created_at,
+    })
+    .from(noteTable)
+    .orderBy(desc(noteTable.created_at));
 
-    return res.status(200).json({ notes });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "server_error", message: "Internal server error" });
-  }
+  return notes;
 };
 
 type AddNote = typeof noteTable.$inferInsert;
@@ -36,4 +30,19 @@ export const addNote = async (req: Request, res: Response) => {
       .status(500)
       .json({ error: "server_error", message: "Internal server error" });
   }
+};
+
+export const getNotesOnCategory = async () => {
+  const notes = await db
+    .select({
+      id: noteTable.id,
+      title: noteTable.id,
+      content: noteTable.content,
+      color: noteTable.color,
+      created_at: noteTable.created_at,
+    })
+    .from(noteTable)
+    .innerJoin(categoryTable, eq(noteTable.categoryId, categoryTable.id));
+
+  return notes;
 };

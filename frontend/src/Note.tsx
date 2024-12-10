@@ -1,13 +1,11 @@
 type Props = {
   data: {
-    notes: {
-      id: string;
-      title: string;
-      content: string;
-      color: string;
-      created_at: string;
-    }[];
-  };
+    id: string;
+    title: string;
+    content: string;
+    color: string;
+    created_at: string;
+  }[];
 };
 
 function Note({ data }: Props) {
@@ -22,7 +20,7 @@ function Note({ data }: Props) {
   return (
     <>
       {data &&
-        data.notes.map((note) => {
+        data.map((note) => {
           const backgroundColor = colorMap[note.color] || "#d1d5db";
           return (
             <div
