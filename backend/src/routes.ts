@@ -18,8 +18,9 @@ routes.get("/notes", async (req: Request, res: Response) => {
   );
 });
 
-routes.get("/notes-category", async (req: Request, res: Response) => {
-  const notes = await getNotesOnCategory();
+routes.get("/notes-category/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const notes = await getNotesOnCategory(id);
 
   return res.status(200).json(
     notes.map((note) => ({

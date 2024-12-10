@@ -32,17 +32,18 @@ export const addNote = async (req: Request, res: Response) => {
   }
 };
 
-export const getNotesOnCategory = async () => {
+export const getNotesOnCategory = async (categoryId: string) => {
   const notes = await db
     .select({
       id: noteTable.id,
       title: noteTable.id,
       content: noteTable.content,
       color: noteTable.color,
+      category_id: noteTable.categoryId,
       created_at: noteTable.created_at,
     })
     .from(noteTable)
-    .innerJoin(categoryTable, eq(noteTable.categoryId, categoryTable.id));
+    .where(eq(noteTable.categoryId, categoryId));
 
   return notes;
 };
