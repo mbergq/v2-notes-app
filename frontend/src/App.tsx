@@ -13,6 +13,10 @@ type Data = [
   }
 ];
 
+type IdParams = {
+  id: string;
+};
+
 function App() {
   const [data, setData] = useState<null | Data>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -24,14 +28,14 @@ function App() {
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
-
+      console.log(result);
       setData(result);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const { id } = useParams();
+  const { id } = useParams<IdParams>();
   const fetchDataOnCategory = async () => {
     if (id === undefined) {
       return;
@@ -76,25 +80,25 @@ function App() {
             >
               new
             </button>
-            <nav>
+            <nav className="mt-8 underline">
               <ul>
-                <Link to={"/"} onClick={fetchData}>
+                <Link to="/" onClick={fetchData}>
                   <li>All</li>
                 </Link>
                 <Link
-                  to={"/93c5e657-ac3f-4c29-8f8d-9647e573f43e"}
+                  to="/93c5e657-ac3f-4c29-8f8d-9647e573f43e"
                   onClick={fetchDataOnCategory}
                 >
                   <li>Shopping</li>
                 </Link>
                 <Link
-                  to={"/541325c5-f05b-4899-8659-84df2844dcdc"}
+                  to="/541325c5-f05b-4899-8659-84df2844dcdc"
                   onClick={fetchDataOnCategory}
                 >
                   <li>To-do</li>
                 </Link>
                 <Link
-                  to={"/90629a6b-9723-4101-a5be-48f950bf2e6a"}
+                  to="/90629a6b-9723-4101-a5be-48f950bf2e6a"
                   onClick={fetchDataOnCategory}
                 >
                   <li>Study</li>
