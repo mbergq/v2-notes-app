@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Note from "./Note";
 import NoteModal from "./components/NoteModal";
+import { Link, useParams } from "react-router";
 
 type Data = [
   {
@@ -23,7 +24,30 @@ function App() {
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
-      // console.log(result);
+
+      setData(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const { id } = useParams();
+  const fetchDataOnCategory = async () => {
+    if (id === undefined) {
+      return;
+    }
+    console.log("Params id:", id);
+
+    console.log("Runs");
+
+    try {
+      const response = await fetch(`api/notes-category/${id}`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      console.log(result);
 
       setData(result);
     } catch (error) {
@@ -54,6 +78,25 @@ function App() {
             >
               new
             </button>
+            <nav>
+              <ul>
+                <Link to={"/"} onClick={fetchData}>
+                  <li>All</li>
+                </Link>
+                <Link
+                  to={"/93c5e657-ac3f-4c29-8f8d-9647e573f43e"}
+                  onClick={fetchDataOnCategory}
+                >
+                  <li>Shopping</li>
+                </Link>
+                <Link to={"/93c5e657-ac3f-4c29-8f8d-9647e573f43e"}>
+                  <li>To-do</li>
+                </Link>
+                <Link to={"/93c5e657-ac3f-4c29-8f8d-9647e573f43e"}>
+                  <li>Study</li>
+                </Link>
+              </ul>
+            </nav>
           </div>
         </div>
         {data !== null && (

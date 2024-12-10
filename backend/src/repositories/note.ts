@@ -36,7 +36,7 @@ export const getNotesOnCategory = async (categoryId: string) => {
   const notes = await db
     .select({
       id: noteTable.id,
-      title: noteTable.id,
+      title: noteTable.title,
       content: noteTable.content,
       color: noteTable.color,
       category_id: noteTable.categoryId,
