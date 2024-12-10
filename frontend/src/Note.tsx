@@ -38,6 +38,11 @@ function Note({ data }: Props) {
             </div>
           );
         })}
+      {data.length === 0 && (
+        <h1 className="text-lg ml-8 mt-8">
+          No notes related to this category..
+        </h1>
+      )}
     </>
   );
 }

@@ -38,8 +38,6 @@ function App() {
     }
     console.log("Params id:", id);
 
-    console.log("Runs");
-
     try {
       const response = await fetch(`api/notes-category/${id}`);
       if (!response.ok) {
@@ -89,10 +87,16 @@ function App() {
                 >
                   <li>Shopping</li>
                 </Link>
-                <Link to={"/93c5e657-ac3f-4c29-8f8d-9647e573f43e"}>
+                <Link
+                  to={"/541325c5-f05b-4899-8659-84df2844dcdc"}
+                  onClick={fetchDataOnCategory}
+                >
                   <li>To-do</li>
                 </Link>
-                <Link to={"/93c5e657-ac3f-4c29-8f8d-9647e573f43e"}>
+                <Link
+                  to={"/90629a6b-9723-4101-a5be-48f950bf2e6a"}
+                  onClick={fetchDataOnCategory}
+                >
                   <li>Study</li>
                 </Link>
               </ul>
