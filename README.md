@@ -33,3 +33,12 @@ Added a lot of styling and App now imports the NoteModal so it can be used. Adde
 functionality so that the modal works well. Post requests are working as intended.
 Added a new category table to be able to filter notes on specific
 categories in the future. Soon ready to start implementing a lot of tests.
+
+Tue 10 Dec
+
+Today I've refactored some code in the api and essentially restructuring the data response.
+Added dynamic routing to be able to filter out notes on different categories. Edited
+my first component test to run via the new data structure. Had some real issues just starting
+cypress in the first place, a reboot fixed it.. Also spent a lot of time trying to understand
+why my test would crash on "uncaught exception, React10.useContext(..) is null." Turns out
+that if I comment out <Link /> components in App it all runs fine..
