@@ -108,7 +108,7 @@ function App() {
           </div>
         </div>
         {data !== null && (
-          <div className="grid grid-cols-3 grid-rows-3">
+          <div className="grid grid-cols-3 grid-rows-3" id="notes-layout">
             <Note data={data} />
           </div>
         )}
