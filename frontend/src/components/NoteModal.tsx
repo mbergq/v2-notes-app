@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { XCircle } from "react-feather";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   onClick: () => void;
@@ -12,32 +13,35 @@ type FormInputs = {
 };
 
 function NoteModal({ onClick }: Props) {
+  const queryClient = useQueryClient();
+
+  const { mutate: addNote } = useMutation({
+    mutationKey: ["newNote"],
+    mutationFn: async (data: FormInputs) => {
+      const response = await fetch(`/api/add-note`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    },
+  });
+
   const {
     register,
     handleSubmit,
     // watch,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormInputs>();
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    const restructuredObject = {
-      title: data.title,
-      content: data.content,
-      color: data.color,
-    };
 
-    try {
-      const response = await fetch(`/api/add-note`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(restructuredObject),
-      });
-      // fetchData();
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    addNote(data);
+    onClick();
   };
 
   return (

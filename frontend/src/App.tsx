@@ -1,51 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Note from "./Note";
 import NoteModal from "./components/NoteModal";
 import { useSearchParams, Link } from "react-router";
-
-type Data = [
-  {
-    id: string;
-    title: string;
-    content: string;
-    color: string;
-    created_at: string;
-  }
-];
+import { useNotes } from "./hooks/useNotes";
 
 function App() {
-  const [data, setData] = useState<null | Data>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryId = searchParams.get("categoryId");
 
-  const fetchAllNotes = async () => {
-    const searchParamsForFetch = new URLSearchParams();
-
-    if (categoryId) {
-      searchParamsForFetch.append("categoryId", categoryId);
-    }
-
-    try {
-      const response = await fetch(`/api/notes?${searchParams.toString()}`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const result = await response.json();
-      console.log(result);
-      setData(result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllNotes();
-  }, [searchParams]);
+  const { data, isLoading } = useNotes({
+    categoryId: categoryId,
+  });
 
   const handleClick = () => {
     setIsVisible(!isVisible);
-    fetchAllNotes();
   };
 
   return (
@@ -76,7 +45,8 @@ function App() {
             </nav>
           </div>
         </div>
-        {data !== null && (
+        {isLoading && "Loading.."}
+        {data && (
           <div className="grid grid-cols-3 gap-6 p-6" id="notes-layout">
             <Note data={data} />
           </div>
