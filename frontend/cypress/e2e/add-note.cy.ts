@@ -8,7 +8,6 @@ describe("add a note flow", () => {
       "My very good note content where I've added a lot of good text"
     );
     cy.get("button[type='submit']").click();
-    cy.get("#closeButton").click();
     cy.contains("My very good note title");
     cy.contains(
       "My very good note content where I've added a lot of good text"
