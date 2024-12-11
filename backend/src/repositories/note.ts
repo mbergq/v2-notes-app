@@ -1,10 +1,10 @@
 import { type Request, type Response } from "express";
 import { desc, eq } from "drizzle-orm";
-import { categoryTable, noteTable } from "../db/schema";
+import { noteTable } from "../db/schema";
 import { db } from "../index";
 
-export const getNotes = async () => {
-  const notes = await db
+export const getNotes = async (categoryId?: string) => {
+  const notesQuery = db
     .select({
       id: noteTable.id,
       title: noteTable.title,
@@ -15,7 +15,13 @@ export const getNotes = async () => {
     .from(noteTable)
     .orderBy(desc(noteTable.created_at));
 
-  return notes;
+  if (categoryId) {
+    notesQuery.where(eq(noteTable.categoryId, categoryId));
+  }
+
+  const result = await notesQuery;
+
+  return result;
 };
 
 type AddNote = typeof noteTable.$inferInsert;
@@ -30,20 +36,4 @@ export const addNote = async (req: Request, res: Response) => {
       .status(500)
       .json({ error: "server_error", message: "Internal server error" });
   }
-};
-
-export const getNotesOnCategory = async (categoryId: string) => {
-  const notes = await db
-    .select({
-      id: noteTable.id,
-      title: noteTable.title,
-      content: noteTable.content,
-      color: noteTable.color,
-      category_id: noteTable.categoryId,
-      created_at: noteTable.created_at,
-    })
-    .from(noteTable)
-    .where(eq(noteTable.categoryId, categoryId));
-
-  return notes;
 };

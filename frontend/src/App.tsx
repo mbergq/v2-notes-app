@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Note from "./Note";
 import NoteModal from "./components/NoteModal";
-import { Link, useParams } from "react-router";
+import { useSearchParams, Link } from "react-router";
 
 type Data = [
   {
@@ -13,44 +13,26 @@ type Data = [
   }
 ];
 
-type IdParams = {
-  id: string;
-};
-
 function App() {
   const [data, setData] = useState<null | Data>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryId = searchParams.get("categoryId");
 
-  const fetchData = async () => {
+  const fetchAllNotes = async () => {
+    const searchParamsForFetch = new URLSearchParams();
+
+    if (categoryId) {
+      searchParamsForFetch.append("categoryId", categoryId);
+    }
+
     try {
-      const response = await fetch(`/api/notes`);
+      const response = await fetch(`/api/notes?${searchParams.toString()}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const result = await response.json();
       console.log(result);
-      setData(result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const { id } = useParams<IdParams>();
-  const fetchDataOnCategory = async () => {
-    if (id === undefined) {
-      return;
-    }
-    console.log("Params id:", id);
-
-    try {
-      const response = await fetch(`api/notes-category/${id}`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const result = await response.json();
-      console.log(result);
-
       setData(result);
     } catch (error) {
       console.error(error);
@@ -58,12 +40,12 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchAllNotes();
+  }, [searchParams]);
 
   const handleClick = () => {
     setIsVisible(!isVisible);
-    fetchData();
+    fetchAllNotes();
   };
 
   return (
@@ -81,34 +63,21 @@ function App() {
               new
             </button>
             <nav className="mt-8 underline">
-              <ul>
-                <Link to="/" onClick={fetchData}>
-                  <li>All</li>
-                </Link>
-                <Link
-                  to="/93c5e657-ac3f-4c29-8f8d-9647e573f43e"
-                  onClick={fetchDataOnCategory}
-                >
-                  <li>Shopping</li>
-                </Link>
-                <Link
-                  to="/541325c5-f05b-4899-8659-84df2844dcdc"
-                  onClick={fetchDataOnCategory}
-                >
-                  <li>To-do</li>
-                </Link>
-                <Link
-                  to="/90629a6b-9723-4101-a5be-48f950bf2e6a"
-                  onClick={fetchDataOnCategory}
-                >
-                  <li>Study</li>
-                </Link>
-              </ul>
+              <Link to="/">All</Link>
+              <button
+                onClick={() =>
+                  setSearchParams({
+                    categoryId: "93c5e657-ac3f-4c29-8f8d-9647e573f43e",
+                  })
+                }
+              >
+                Shopping
+              </button>
             </nav>
           </div>
         </div>
         {data !== null && (
-          <div className="grid grid-cols-3 grid-rows-3" id="notes-layout">
+          <div className="grid grid-cols-3 gap-6 p-6" id="notes-layout">
             <Note data={data} />
           </div>
         )}
