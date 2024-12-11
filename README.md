@@ -42,3 +42,9 @@ my first component test to run via the new data structure. Had some real issues 
 cypress in the first place, a reboot fixed it.. Also spent a lot of time trying to understand
 why my test would crash on "uncaught exception, React10.useContext(..) is null." Turns out
 that if I comment out <Link /> components in App it all runs fine..
+
+Wed 11 Dec
+
+Fixed the issue of notes not rendering upon "initial click". This was fixed with "TDD" method.
+Have done a lot of refactoring both in backend and frontend to follow DRY as much as possible.
+Added some e2e tests.
