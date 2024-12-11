@@ -48,13 +48,18 @@ function NoteModal({ onClick }: Props) {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col my-4 mx-4"
         >
-          <button onClick={onClick} className="self-end text-gray">
+          <button
+            onClick={onClick}
+            className="self-end text-gray"
+            id="closeButton"
+          >
             <XCircle color="grey" size={28} />
           </button>
 
           <input
             {...register("title")}
             className="w-fit rounded-sm text-gray"
+            id="title"
           />
           <div className="w-fit h-fit my-1">
             <input
