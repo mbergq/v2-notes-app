@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
@@ -23,16 +24,30 @@ function Note({ data }: Props) {
     yellow: "#fbd589",
   };
 
-  const {
-    register,
-    handleSubmit,
-    // watch,
-    // formState: { errors },
-  } = useForm<FormInputs>();
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteNote } = useMutation({
+    mutationKey: ["deleteNote"],
+    mutationFn: async (data: FormInputs) => {
+      const response = await fetch(`/api/delete-note`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    },
+  });
+
+  const { register, handleSubmit } = useForm<FormInputs>();
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     console.log(data);
-    // deleteNote(data);
+    deleteNote(data);
   };
 
   return (
@@ -56,7 +71,7 @@ function Note({ data }: Props) {
                   defaultValue={note.id}
                   {...register("id")}
                   className="hidden"
-                ></input>
+                />
               </form>
             </div>
           );
