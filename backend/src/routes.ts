@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { type Request, type Response } from "express";
-import { getNotes, addNote } from "./repositories/note";
+import { getNotes, addNote, deleteNote } from "./repositories/note";
 
 const routes = Router();
 
@@ -21,5 +21,12 @@ routes.get("/notes", async (req: Request, res: Response) => {
 });
 
 routes.post("/add-note", addNote);
+
+routes.delete("/delete-note", async (req: Request, res: Response) => {
+  const noteId = req.body.id;
+  const deleteNoteOnId = await deleteNote(noteId);
+
+  return res.status(200).json({ deleteNoteOnId });
+});
 
 export default routes;

@@ -37,3 +37,11 @@ export const addNote = async (req: Request, res: Response) => {
       .json({ error: "server_error", message: "Internal server error" });
   }
 };
+
+export const deleteNote = async (noteId: string) => {
+  const deleteNoteQuery = await db
+    .delete(noteTable)
+    .where(eq(noteTable.id, noteId));
+
+  return deleteNoteQuery;
+};
