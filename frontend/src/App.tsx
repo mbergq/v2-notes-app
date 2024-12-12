@@ -42,6 +42,24 @@ function App() {
               >
                 Shopping
               </button>
+              <button
+                onClick={() =>
+                  setSearchParams({
+                    categoryId: "541325c5-f05b-4899-8659-84df2844dcdc",
+                  })
+                }
+              >
+                To-do
+              </button>
+              <button
+                onClick={() =>
+                  setSearchParams({
+                    categoryId: "90629a6b-9723-4101-a5be-48f950bf2e6a",
+                  })
+                }
+              >
+                Study
+              </button>
             </nav>
           </div>
         </div>
