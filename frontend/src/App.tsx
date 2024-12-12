@@ -31,9 +31,10 @@ function App() {
             >
               new
             </button>
-            <nav className="mt-8 underline">
+            <div className="flex flex-col underline mt-8">
               <Link to="/">All</Link>
               <button
+                className="self-start"
                 onClick={() =>
                   setSearchParams({
                     categoryId: "93c5e657-ac3f-4c29-8f8d-9647e573f43e",
@@ -43,6 +44,7 @@ function App() {
                 Shopping
               </button>
               <button
+                className="self-start"
                 onClick={() =>
                   setSearchParams({
                     categoryId: "541325c5-f05b-4899-8659-84df2844dcdc",
@@ -52,6 +54,7 @@ function App() {
                 To-do
               </button>
               <button
+                className="self-start"
                 onClick={() =>
                   setSearchParams({
                     categoryId: "90629a6b-9723-4101-a5be-48f950bf2e6a",
@@ -60,7 +63,7 @@ function App() {
               >
                 Study
               </button>
-            </nav>
+            </div>
           </div>
         </div>
         {isLoading && "Loading.."}
