@@ -1,3 +1,5 @@
+import { SubmitHandler, useForm } from "react-hook-form";
+
 type Props = {
   data: {
     id: string;
@@ -8,6 +10,10 @@ type Props = {
   }[];
 };
 
+type FormInputs = {
+  id: string;
+};
+
 function Note({ data }: Props) {
   const colorMap: { [key: string]: string } = {
     green: "#d6ffe9",
@@ -15,6 +21,18 @@ function Note({ data }: Props) {
     red: "#de6c83",
     darkpurple: "#7b72ac",
     yellow: "#fbd589",
+  };
+
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    // formState: { errors },
+  } = useForm<FormInputs>();
+
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    console.log(data);
+    // deleteNote(data);
   };
 
   return (
@@ -30,9 +48,16 @@ function Note({ data }: Props) {
               className={"border-2 border-gray p-4 rounded-md"}
               style={{ backgroundColor: backgroundColor }}
             >
-              <button>Delete</button>
               <h1 className="text-xl">{note.title}</h1>
               <p>{note.content}</p>
+              <form method="delete" onSubmit={handleSubmit(onSubmit)}>
+                <button type="submit">Delete</button>
+                <input
+                  defaultValue={note.id}
+                  {...register("id")}
+                  className="hidden"
+                ></input>
+              </form>
             </div>
           );
         })}
