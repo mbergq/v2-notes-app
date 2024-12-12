@@ -18,7 +18,7 @@ function NoteModal({ onClick }: Props) {
   const { mutate: addNote } = useMutation({
     mutationKey: ["newNote"],
     mutationFn: async (data: FormInputs) => {
-      const response = await fetch(`/api/add-note`, {
+      const response = await fetch(`/api/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -32,12 +32,7 @@ function NoteModal({ onClick }: Props) {
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    // watch,
-    // formState: { errors },
-  } = useForm<FormInputs>();
+  const { register, handleSubmit } = useForm<FormInputs>();
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     addNote(data);

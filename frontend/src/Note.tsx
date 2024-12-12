@@ -1,5 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useDeleteNote } from "./hooks/useDeleteNote";
 
 type Props = {
   data: {
@@ -11,43 +10,15 @@ type Props = {
   }[];
 };
 
-type FormInputs = {
-  id: string;
-};
-
 function Note({ data }: Props) {
+  const { mutate: deleteNote } = useDeleteNote();
+
   const colorMap: { [key: string]: string } = {
     green: "#d6ffe9",
     lightpurple: "#bbc2e2",
     red: "#de6c83",
     darkpurple: "#7b72ac",
     yellow: "#fbd589",
-  };
-
-  const queryClient = useQueryClient();
-
-  const { mutate: deleteNote } = useMutation({
-    mutationKey: ["deleteNote"],
-    mutationFn: async (data: FormInputs) => {
-      const response = await fetch(`/api/delete-note`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
-    },
-  });
-
-  const { register, handleSubmit } = useForm<FormInputs>();
-
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    console.log(data);
-    deleteNote(data);
   };
 
   return (
@@ -60,19 +31,14 @@ function Note({ data }: Props) {
               data-cy="note-wrapper"
               id={note.id}
               key={note.id}
-              className={"border-2 border-gray p-4 rounded-md"}
               style={{ backgroundColor: backgroundColor }}
+              className={"border-2 border-gray p-4 rounded-md"}
             >
               <h1 className="text-xl">{note.title}</h1>
               <p>{note.content}</p>
-              <form method="delete" onSubmit={handleSubmit(onSubmit)}>
-                <button type="submit">Delete</button>
-                <input
-                  defaultValue={note.id}
-                  {...register("id")}
-                  className="hidden"
-                />
-              </form>
+              <button onClick={() => deleteNote(note.id)} type="button">
+                Delete
+              </button>
             </div>
           );
         })}

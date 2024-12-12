@@ -65,7 +65,10 @@ function App() {
         </div>
         {isLoading && "Loading.."}
         {data && (
-          <div className="grid grid-cols-3 gap-6 p-6" id="notes-layout">
+          <div
+            className="grid grid-cols-3 grid-rows-3 gap-4 p-4"
+            id="notes-layout"
+          >
             <Note data={data} />
           </div>
         )}

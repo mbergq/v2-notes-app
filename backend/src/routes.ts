@@ -20,10 +20,10 @@ routes.get("/notes", async (req: Request, res: Response) => {
   );
 });
 
-routes.post("/add-note", addNote);
+routes.post("/notes", addNote);
 
-routes.delete("/delete-note", async (req: Request, res: Response) => {
-  const noteId = req.body.id;
+routes.delete("/notes/:id", async (req: Request, res: Response) => {
+  const noteId = req.params.id;
   const deleteNoteOnId = await deleteNote(noteId);
 
   return res.status(200).json({ deleteNoteOnId });
