@@ -13,7 +13,7 @@ function App() {
     categoryId: categoryId,
   });
 
-  const handleClick = () => {
+  const triggerModal = () => {
     setIsVisible(!isVisible);
   };
 
@@ -26,7 +26,7 @@ function App() {
         <div className="min-h-dvh h-full w-44 border-r-2 border-r-gray flex flex-col">
           <div className="h-full ml-4 mt-4">
             <button
-              onClick={handleClick}
+              onClick={triggerModal}
               className="border-2 border-gray w-fit p-1 text-xl text-gray"
             >
               new
@@ -69,7 +69,7 @@ function App() {
         {isLoading && "Loading.."}
         {data && (
           <div
-            className="grid grid-cols-3 grid-rows-3 gap-4 p-4"
+            className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-4"
             id="notes-layout"
           >
             <Note data={data} />
@@ -78,7 +78,7 @@ function App() {
       </div>
       {isVisible && (
         <div className="fixed w-full h-full top-0 left-0 flex-1 justify-center items-center">
-          <NoteModal onClick={handleClick} />
+          <NoteModal onClick={triggerModal} />
         </div>
       )}
     </>
