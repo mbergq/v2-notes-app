@@ -1,5 +1,5 @@
-import { type Request, type Response } from "express";
 import { desc, eq } from "drizzle-orm";
+import { type AddNote } from "../db/schema";
 import { noteTable } from "../db/schema";
 import { db } from "../index";
 
@@ -24,18 +24,10 @@ export const getNotes = async (categoryId?: string) => {
   return result;
 };
 
-type AddNote = typeof noteTable.$inferInsert;
+export const addNote = async (noteData: AddNote) => {
+  const addNoteQuery = await db.insert(noteTable).values(noteData);
 
-export const addNote = async (req: Request, res: Response) => {
-  const body: AddNote = req.body;
-  try {
-    await db.insert(noteTable).values(body);
-    return res.status(200).json({ message: "Note was succesfully added" });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "server_error", message: "Internal server error" });
-  }
+  return addNoteQuery;
 };
 
 export const deleteNote = async (noteId: string) => {

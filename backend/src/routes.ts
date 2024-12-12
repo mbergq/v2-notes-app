@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { type AddNote } from "./db/schema";
 import { type Request, type Response } from "express";
 import { getNotes, addNote, deleteNote } from "./repositories/note";
 
@@ -20,7 +21,14 @@ routes.get("/notes", async (req: Request, res: Response) => {
   );
 });
 
-routes.post("/notes", addNote);
+routes.post("/notes", async (req: Request, res: Response) => {
+  const body: AddNote = req.body;
+  const insertNote = await addNote(body);
+
+  return res.status(200).json({
+    insertNote,
+  });
+});
 
 routes.delete("/notes/:id", async (req: Request, res: Response) => {
   const noteId = req.params.id;

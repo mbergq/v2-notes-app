@@ -27,3 +27,5 @@ export const noteTable = pgTable("note", {
   categoryId: uuid("category_id").references(() => categoryTable.id),
   created_at: timestamp().defaultNow(),
 });
+
+export type AddNote = typeof noteTable.$inferInsert;
