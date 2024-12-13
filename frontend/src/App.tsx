@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Note from "./Note";
 import NoteModal from "./components/NoteModal";
-import NoteCategories from "./components/NoteCategories";
 import { useSearchParams, Link } from "react-router";
 import { useNotes } from "./hooks/useNotes";
 
@@ -13,7 +12,6 @@ function App() {
   const { data, isLoading } = useNotes({
     categoryId: categoryId,
   });
-  console.log(data?.notes);
 
   const triggerModal = () => {
     setIsVisible(!isVisible);
@@ -35,7 +33,18 @@ function App() {
             </button>
             <div className="flex flex-col underline mt-8">
               <Link to="/">All</Link>
-              {data && <NoteCategories data={data.categories} />}
+              {data &&
+                data.categories.map((category) => (
+                  <div key={category.id}>
+                    <button
+                      onClick={() =>
+                        setSearchParams({ categoryId: category.id })
+                      }
+                    >
+                      {category.name}
+                    </button>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
