@@ -41,7 +41,8 @@ function App() {
                         setSearchParams({ categoryId: category.id })
                       }
                     >
-                      {category.name}
+                      {category.name.charAt(0).toUpperCase() +
+                        category.name.slice(1)}
                     </button>
                   </div>
                 ))}
