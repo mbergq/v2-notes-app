@@ -54,3 +54,11 @@ Thu 12 Dec
 Added functionality to delete a note upon click. Started with a BDD test to use TDD.
 Found out my last check of the test wasn't working as intended, will need to fix that.
 Did some refactoring in the API. Added some styling.
+
+Fri 13 Dec
+
+Fixed last check of delete note test. Dynamic displaying of categories imple
+mented. Did some refactoring in the API. Added diagram. 
+
+Tried to implement code coverage but ran into a lot of trouble so I had 
+to scratch it for now.
