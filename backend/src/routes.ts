@@ -1,24 +1,21 @@
 import { Router } from "express";
 import { type AddNote } from "./db/schema";
 import { type Request, type Response } from "express";
-import { getNotes, addNote, deleteNote } from "./repositories/note";
+import {
+  getNotes,
+  addNote,
+  deleteNote,
+  getCategories,
+} from "./repositories/note";
 
 const routes = Router();
 
 routes.get("/notes", async (req: Request, res: Response) => {
   const categoryId = req.query.categoryId;
 
-  const { notes, categories } = await getNotes(categoryId);
+  const notes = await getNotes(categoryId);
+  const categories = await getCategories();
 
-  // return res.status(200).json(
-  //   notes.map((note) => ({
-  //     id: note.id,
-  //     title: note.title,
-  //     content: note.content,
-  //     color: note.color,
-  //     created_at: note.created_at,
-  //   }))
-  // );
   return res.status(200).json({ notes: notes, categories: categories });
 });
 

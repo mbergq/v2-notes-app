@@ -19,29 +19,27 @@ export const getNotes = async (categoryId?: string) => {
     notesQuery.where(eq(noteTable.categoryId, categoryId));
   }
 
+  const result = await notesQuery;
+
+  return result;
+};
+
+export const getCategories = async () => {
   const categoryQuery = db
     .select({ id: categoryTable.id, name: categoryTable.name })
     .from(categoryTable);
 
-  const notePromise = notesQuery.execute();
-  const categoryPromise = categoryQuery.execute();
+  const result = await categoryQuery;
 
-  const [notes, categories] = await Promise.all([notePromise, categoryPromise]);
-
-  return { notes: notes, categories: categories };
+  return result;
 };
 
-// export const getCategories = async () => {
-//   const categoryQuery = db
-//     .select({ id: categoryTable.id, name: categoryTable.name })
-//     .from(categoryTable);
-//     return
-// }
-
 export const addNote = async (noteData: AddNote) => {
-  const addNoteQuery = await db.insert(noteTable).values(noteData);
+  const addNoteQuery = db.insert(noteTable).values(noteData);
 
-  return addNoteQuery;
+  const result = await addNoteQuery;
+
+  return result;
 };
 
 export const deleteNote = async (noteId: string) => {
@@ -49,5 +47,7 @@ export const deleteNote = async (noteId: string) => {
     .delete(noteTable)
     .where(eq(noteTable.id, noteId));
 
-  return deleteNoteQuery;
+  const result = await deleteNoteQuery;
+
+  return result;
 };
