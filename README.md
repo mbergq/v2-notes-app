@@ -48,3 +48,9 @@ Wed 11 Dec
 Fixed the issue of notes not rendering upon "initial click". This was fixed with "TDD" method.
 Have done a lot of refactoring both in backend and frontend to follow DRY as much as possible.
 Added some e2e tests.
+
+Thu 12 Dec
+
+Added functionality to delete a note upon click. Started with a BDD test to use TDD.
+Found out my last check of the test wasn't working as intended, will need to fix that.
+Did some refactoring in the API. Added some styling.
