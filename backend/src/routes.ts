@@ -8,17 +8,18 @@ const routes = Router();
 routes.get("/notes", async (req: Request, res: Response) => {
   const categoryId = req.query.categoryId;
 
-  const notes = await getNotes(categoryId);
+  const { notes, categories } = await getNotes(categoryId);
 
-  return res.status(200).json(
-    notes.map((note) => ({
-      id: note.id,
-      title: note.title,
-      content: note.content,
-      color: note.color,
-      created_at: note.created_at,
-    }))
-  );
+  // return res.status(200).json(
+  //   notes.map((note) => ({
+  //     id: note.id,
+  //     title: note.title,
+  //     content: note.content,
+  //     color: note.color,
+  //     created_at: note.created_at,
+  //   }))
+  // );
+  return res.status(200).json({ notes: notes, categories: categories });
 });
 
 routes.post("/notes", async (req: Request, res: Response) => {

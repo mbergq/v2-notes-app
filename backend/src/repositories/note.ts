@@ -1,6 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { type AddNote } from "../db/schema";
-import { noteTable } from "../db/schema";
+import { noteTable, categoryTable } from "../db/schema";
 import { db } from "../index";
 
 export const getNotes = async (categoryId?: string) => {
@@ -19,10 +19,24 @@ export const getNotes = async (categoryId?: string) => {
     notesQuery.where(eq(noteTable.categoryId, categoryId));
   }
 
-  const result = await notesQuery;
+  const categoryQuery = db
+    .select({ id: categoryTable.id, name: categoryTable.name })
+    .from(categoryTable);
 
-  return result;
+  const notePromise = notesQuery.execute();
+  const categoryPromise = categoryQuery.execute();
+
+  const [notes, categories] = await Promise.all([notePromise, categoryPromise]);
+
+  return { notes: notes, categories: categories };
 };
+
+// export const getCategories = async () => {
+//   const categoryQuery = db
+//     .select({ id: categoryTable.id, name: categoryTable.name })
+//     .from(categoryTable);
+//     return
+// }
 
 export const addNote = async (noteData: AddNote) => {
   const addNoteQuery = await db.insert(noteTable).values(noteData);
