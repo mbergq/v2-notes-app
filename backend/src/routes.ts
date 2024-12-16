@@ -13,10 +13,17 @@ const routes = Router();
 routes.get("/notes", async (req: Request, res: Response) => {
   const categoryId = req.query.categoryId;
 
-  const notes = await getNotes(categoryId);
-  const categories = await getCategories();
+  const notes = getNotes(categoryId);
+  const categories = getCategories();
 
-  return res.status(200).json({ notes: notes, categories: categories });
+  const [notesPromise, categoriesPromise] = await Promise.all([
+    notes,
+    categories,
+  ]);
+
+  return res
+    .status(200)
+    .json({ notes: notesPromise, categories: categoriesPromise });
 });
 
 routes.post("/notes", async (req: Request, res: Response) => {
