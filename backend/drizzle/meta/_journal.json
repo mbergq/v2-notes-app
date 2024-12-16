@@ -15,6 +15,13 @@
       "when": 1734082913859,
       "tag": "0001_green_norrin_radd",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1734364970774,
+      "tag": "0002_powerful_mephistopheles",
+      "breakpoints": true
     }
   ]
 }

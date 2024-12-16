@@ -29,7 +29,6 @@ routes.get("/notes", async (req: Request, res: Response) => {
 routes.post("/notes", async (req: Request, res: Response) => {
   const body: AddNote = req.body;
   const insertNote = await addNote(body);
-  console.log(body);
 
   return res.status(200).json({
     insertNote,

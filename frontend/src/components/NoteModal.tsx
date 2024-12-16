@@ -10,7 +10,7 @@ type FormInputs = {
   title: string;
   content: string;
   color: string;
-  category_id: string;
+  categoryId: string;
 };
 
 function NoteModal({ onClick }: Props) {
@@ -67,23 +67,23 @@ function NoteModal({ onClick }: Props) {
             <label htmlFor="shopping">Shopping</label>
             <input
               type="radio"
-              {...register("category_id")}
+              {...register("categoryId")}
               value="shopping"
-              name="category_id"
+              name="categoryId"
             />
             <label htmlFor="shopping">To-do</label>
             <input
               type="radio"
-              {...register("category_id")}
+              {...register("categoryId")}
               value="to-do"
-              name="category_id"
+              name="categoryId"
             />
             <label htmlFor="shopping">Study</label>
             <input
               type="radio"
-              {...register("category_id")}
+              {...register("categoryId")}
               value="study"
-              name="category_id"
+              name="categoryId"
             />
           </div>
           <div className="w-fit h-fit my-1">
