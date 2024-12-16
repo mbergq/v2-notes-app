@@ -35,6 +35,10 @@ export const getCategories = async () => {
 };
 
 export const addNote = async (noteData: AddNote) => {
+  const getCategoryId = await db
+    .select({ id: categoryTable.id })
+    .from(categoryTable)
+    .where(eq(categoryTable.name, "shopping"));
   const addNoteQuery = db.insert(noteTable).values(noteData);
 
   const result = await addNoteQuery;
