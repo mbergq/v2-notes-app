@@ -10,6 +10,7 @@ type FormInputs = {
   title: string;
   content: string;
   color: string;
+  category_id: string;
 };
 
 function NoteModal({ onClick }: Props) {
@@ -35,6 +36,8 @@ function NoteModal({ onClick }: Props) {
   const { register, handleSubmit } = useForm<FormInputs>();
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    console.log(data);
+
     addNote(data);
     onClick();
   };
@@ -60,6 +63,29 @@ function NoteModal({ onClick }: Props) {
             className="w-fit rounded-sm text-gray"
             id="title"
           />
+          <div>
+            <label htmlFor="shopping">Shopping</label>
+            <input
+              type="radio"
+              {...register("category_id")}
+              value="shopping"
+              name="category_id"
+            />
+            <label htmlFor="shopping">To-do</label>
+            <input
+              type="radio"
+              {...register("category_id")}
+              value="to-do"
+              name="category_id"
+            />
+            <label htmlFor="shopping">Study</label>
+            <input
+              type="radio"
+              {...register("category_id")}
+              value="study"
+              name="category_id"
+            />
+          </div>
           <div className="w-fit h-fit my-1">
             <input
               type="radio"
