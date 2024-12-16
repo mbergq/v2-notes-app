@@ -62,3 +62,8 @@ mented. Did some refactoring in the API. Added diagram.
 
 Tried to implement code coverage but ran into a lot of trouble so I had 
 to scratch it for now.
+
+Mon 16 Dec
+
+Added minor api changes regarding promises for fetching data. Spent half of the
+day trying to implement code coverage but kept running into issues to it's put on hold for now. Have begun working on implementing ability to choose not category.
