@@ -35,7 +35,7 @@ function Note({ data }: Props) {
               className={"border-2 border-gray p-4 rounded-md"}
             >
               <h1 className="text-xl">{note.title}</h1>
-              <p>{note.content}</p>
+              <p className="w-72">{note.content}</p>
               <button onClick={() => deleteNote(note.id)} type="button">
                 Delete
               </button>
