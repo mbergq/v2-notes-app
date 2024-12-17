@@ -32,13 +32,21 @@ function Note({ data }: Props) {
               id={note.id}
               key={note.id}
               style={{ backgroundColor: backgroundColor }}
-              className={"border-2 border-gray p-4 rounded-md"}
+              className={
+                "border-2 border-gray p-4 rounded-md flex flex-col flex-wrap"
+              }
             >
-              <h1 className="text-xl">{note.title}</h1>
+              <div className="flex justify-between">
+                <h1 className="text-xl">{note.title}</h1>
+                <button
+                  onClick={() => deleteNote(note.id)}
+                  type="button"
+                  className="hover:bg-gray border rounded-md p-1 w-fit text-sm"
+                >
+                  Delete
+                </button>
+              </div>
               <p className="w-72">{note.content}</p>
-              <button onClick={() => deleteNote(note.id)} type="button">
-                Delete
-              </button>
             </div>
           );
         })}
