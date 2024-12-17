@@ -27,7 +27,7 @@ function App() {
           <div className="h-full ml-4 mt-4">
             <button
               onClick={triggerModal}
-              className="border-2 border-gray w-fit p-1 text-xl text-gray"
+              className="border-2 border-gray w-fit p-1 text-xl text-gray hover:bg-green"
             >
               new
             </button>
@@ -40,6 +40,7 @@ function App() {
                       onClick={() =>
                         setSearchParams({ categoryId: category.id })
                       }
+                      className="hover:underline"
                     >
                       {category.name.charAt(0).toUpperCase() +
                         category.name.slice(1)}
