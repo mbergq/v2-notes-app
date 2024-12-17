@@ -67,3 +67,7 @@ Mon 16 Dec
 
 Added minor api changes regarding promises for fetching data. Spent half of the
 day trying to implement code coverage but kept running into issues to it's put on hold for now. Have begun working on implementing ability to choose not category.
+
+Tue 17 Dec
+
+Added function in api to enable inserts of category relation. Tried to let the api function be as dry as possible. Edited some e2e tests. Added styling.  
