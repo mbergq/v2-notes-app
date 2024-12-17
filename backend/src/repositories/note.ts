@@ -35,11 +35,38 @@ export const getCategories = async () => {
 };
 
 export const addNote = async (noteData: AddNote) => {
-  const getCategoryId = await db
-    .select({ id: categoryTable.id })
-    .from(categoryTable)
-    .where(eq(categoryTable.name, "shopping"));
-  const addNoteQuery = db.insert(noteTable).values(noteData);
+  const data = noteData;
+
+  switch (noteData.categoryId) {
+    case "shopping":
+      const shoppingId = await db
+        .select({ id: categoryTable.id })
+        .from(categoryTable)
+        .where(eq(categoryTable.name, "shopping"));
+
+      data["categoryId"] = shoppingId[0].id;
+      break;
+
+    case "to-do":
+      const todoId = await db
+        .select({ id: categoryTable.id })
+        .from(categoryTable)
+        .where(eq(categoryTable.name, "to-do"));
+
+      data["categoryId"] = todoId[0].id;
+      break;
+
+    case "study":
+      const studyId = await db
+        .select({ id: categoryTable.id })
+        .from(categoryTable)
+        .where(eq(categoryTable.name, "study"));
+
+      data["categoryId"] = studyId[0].id;
+      break;
+  }
+
+  const addNoteQuery = db.insert(noteTable).values(data);
 
   const result = await addNoteQuery;
 
