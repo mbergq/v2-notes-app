@@ -1,35 +1,35 @@
-## Goals
+# Goals
 
 This is a webapp that enables you to view and add notes.
 
-## Built with
+# Built with
 
-Vite
-React
-Drizzle ORM
-Tailwindcss
-Cypress
+- Vite
+- React
+- Drizzle ORM
+- Tailwindcss
+- Cypress
 
 # Getting started
 
 ## Prerequisities
 
-Have Bun installed: https://bun.sh/
-Have Docker installed: https://www.docker.com/
+- Have Bun installed: https://bun.sh/
+- Have Docker installed: https://www.docker.com/
 
 ## Installation
 
 Initialize a database with Docker
 
-- docker run -p 127.0.0.1:yourchoiceofport:5432 --name yourdbname -e POSTGRES_PASSWORD=yourdbpassword -d postgres
-  (reminder to pick any port but 8080 since Express will occupy 8080 in this project)
+1. docker run -p 127.0.0.1:yourchoiceofport:5432 --name yourdbname -e POSTGRES_PASSWORD=yourdbpassword -d postgres
+   (reminder to pick any port but 8080 since Express will occupy 8080 in this project)
 
-- Go into backend folder and add an .env file with your database connection string like so:
-- DATABASE_URL=postgres://postgres:yourdbname@127.0.0.1:yourchoiceofport/postgres
+2. Go into backend folder and add an .env file with your database connection string like so:
+3. DATABASE_URL=postgres://postgres:yourdbname@127.0.0.1:yourchoiceofport/postgres
 
 ## Install dependencies and add tables to database:
 
-While at root in the backend folder run:
+Navigate to root in the backend folder run:
 
 - bun install
 - bunx drizzle-kit generate
@@ -40,22 +40,19 @@ While at root in the backend folder run:
 Some of the functions in this app won't work unless some data has been added.
 Run these queries in postgresql to make sure the app won't fail.
 
-To use the postgresql interface Drizzle ORM provides you can run:
+### To use the postgresql interface Drizzle ORM provides you can run:
 
 - bunx drizzle-kit studio
 
-Then use the link to open the interface in the browser.
+Use the link to open the interface in the browser.
 
 Run the insertions in the DB:
 
-INSERT INTO category (name)
-VALUES ('shopping');
+- INSERT INTO category (name) VALUES ('shopping');
 
-INSERT INTO category (name)
-VALUES ('to-do');
+- INSERT INTO category (name) VALUES ('to-do');
 
-INSERT INTO category (name)
-VALUES ('study');
+- INSERT INTO category (name) VALUES ('study');
 
 ## Run the backend
 
