@@ -1,3 +1,81 @@
+## Goals
+
+This is a webapp that enables you to view and add notes.
+
+## Built with
+
+Vite
+React
+Drizzle ORM
+Tailwindcss
+Cypress
+
+# Getting started
+
+## Prerequisities
+
+Have Bun installed: https://bun.sh/
+Have Docker installed: https://www.docker.com/
+
+## Installation
+
+Initialize a database with Docker
+
+- docker run -p 127.0.0.1:yourchoiceofport:5432 --name yourdbname -e POSTGRES_PASSWORD=yourdbpassword -d postgres
+  (reminder to pick any port but 8080 since Express will occupy 8080 in this project)
+
+- Go into backend folder and add an .env file with your database connection string like so:
+- DATABASE_URL=postgres://postgres:yourdbname@127.0.0.1:yourchoiceofport/postgres
+
+## Install dependencies and add tables to database:
+
+While at root in the backend folder run:
+
+- bun install
+- bunx drizzle-kit generate
+- bunx drizzle-kit migrate
+
+## Insert data
+
+Some of the functions in this app won't work unless some data has been added.
+Run these queries in postgresql to make sure the app won't fail.
+
+To use the postgresql interface Drizzle ORM provides you can run:
+
+- bunx drizzle-kit studio
+
+Then use the link to open the interface in the browser.
+
+Run the insertions in the DB:
+
+INSERT INTO category (name)
+VALUES ('shopping');
+
+INSERT INTO category (name)
+VALUES ('to-do');
+
+INSERT INTO category (name)
+VALUES ('study');
+
+## Run the backend
+
+At root in backend folder run:
+
+- bun server.ts
+
+## Install and run frontend
+
+Go to frontend folder and run these commands:
+
+- bun install
+- bun run dev
+
+## Run Cypress tests
+
+At root in frontend run these commands:
+
+- npx cypress open
+
 ### Changelog
 
 Mon 2 Dec
@@ -58,9 +136,9 @@ Did some refactoring in the API. Added some styling.
 Fri 13 Dec
 
 Fixed last check of delete note test. Dynamic displaying of categories imple
-mented. Did some refactoring in the API. Added diagram. 
+mented. Did some refactoring in the API. Added diagram.
 
-Tried to implement code coverage but ran into a lot of trouble so I had 
+Tried to implement code coverage but ran into a lot of trouble so I had
 to scratch it for now.
 
 Mon 16 Dec
@@ -70,4 +148,4 @@ day trying to implement code coverage but kept running into issues to it's put o
 
 Tue 17 Dec
 
-Added function in api to enable inserts of category relation. Tried to let the api function be as dry as possible. Edited some e2e tests. Added styling.  
+Added function in api to enable inserts of category relation. Tried to let the api function be as dry as possible. Edited some e2e tests. Added styling.

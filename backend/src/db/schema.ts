@@ -8,7 +8,7 @@ export const categoryEnum = pgEnum("category_names", [
 
 export const categoryTable = pgTable("category", {
   id: uuid().defaultRandom().primaryKey(),
-  name: categoryEnum(),
+  name: categoryEnum().unique(),
 });
 
 export const colorEnum = pgEnum("color", [
