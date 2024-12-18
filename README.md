@@ -146,3 +146,7 @@ day trying to implement code coverage but kept running into issues to it's put o
 Tue 17 Dec
 
 Added function in api to enable inserts of category relation. Tried to let the api function be as dry as possible. Edited some e2e tests. Added styling.
+
+Wed 18 Dec
+
+Added new e2e test. Added instructions for setting up project.
