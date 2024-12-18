@@ -22,6 +22,13 @@
       "when": 1734364970774,
       "tag": "0002_powerful_mephistopheles",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1734532453476,
+      "tag": "0003_needy_eddie_brock",
+      "breakpoints": true
     }
   ]
 }
