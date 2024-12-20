@@ -51,7 +51,7 @@ function Note({ data }: Props) {
           );
         })}
       {data.length === 0 && (
-        <h1 className="text-lg ml-5 mt-5">
+        <h1 id="no-note-msg" className="text-lg ml-5 mt-5">
           No notes related to this category..
         </h1>
       )}

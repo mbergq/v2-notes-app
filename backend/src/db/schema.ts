@@ -23,10 +23,8 @@ export const noteTable = pgTable("note", {
   id: uuid().defaultRandom().primaryKey(),
   title: varchar({ length: 80 }).notNull(),
   content: varchar({ length: 1000 }).notNull(),
-  color: colorEnum().notNull(),
-  categoryId: uuid("category_id")
-    .references(() => categoryTable.id)
-    .notNull(),
+  color: colorEnum(),
+  categoryId: uuid("category_id").references(() => categoryTable.id),
   created_at: timestamp().defaultNow(),
 });
 
