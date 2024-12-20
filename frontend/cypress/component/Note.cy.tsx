@@ -1,5 +1,5 @@
 import React from "react";
-import Note from "../../src/Note";
+import Note from "../../src/components/Note";
 
 const data = [
   {

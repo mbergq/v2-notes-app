@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Note from "./Note";
+import Note from "./components/Note";
 import NoteModal from "./components/NoteModal";
 import { useSearchParams, Link } from "react-router";
 import { useNotes } from "./hooks/useNotes";
