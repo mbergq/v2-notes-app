@@ -1,15 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 
-// type Data = [
-//   {
-//     id: string;
-//     title: string;
-//     content: string;
-//     color: string;
-//     created_at: string;
-//   }
-// ];
-
 type Data = {
   notes: [
     {

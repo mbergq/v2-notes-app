@@ -1,6 +1,7 @@
 # Goals
 
-This is a webapp that enables you to view and add notes.
+This is a webapp that enables you to add notes with an assigned category. It allows
+you to also view and delete notes.
 
 # Built with
 
