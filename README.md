@@ -73,6 +73,12 @@ Go to frontend folder and run these commands:
 At root in frontend run these commands:
 
 - npx cypress open
+- Run the e2e tests in this order for them to work as intended:
+
+1. add-note.cy.ts
+2. navigation.cy.ts
+3. DeleteNote.feature
+4. exit-modal.cy.ts
 
 ### Changelog
 
