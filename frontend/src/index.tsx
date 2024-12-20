@@ -4,7 +4,7 @@ import NoteModal from "./components/NoteModal";
 import { useSearchParams, Link } from "react-router";
 import { useNotes } from "./hooks/useNotes";
 
-function App() {
+function Index() {
   const [isVisible, setIsVisible] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryId = searchParams.get("categoryId");
@@ -69,4 +69,4 @@ function App() {
   );
 }
 
-export default App;
+export default Index;

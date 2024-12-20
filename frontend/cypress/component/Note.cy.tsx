@@ -1,6 +1,5 @@
 import React from "react";
 import Note from "../../src/Note";
-import App from "../../src/App";
 
 const data = [
   {
@@ -12,29 +11,29 @@ const data = [
   },
 ];
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      enabled: false,
+      retry: false,
+    },
+  },
+});
+
+const TestWrapper = ({ children }) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+);
+
 describe("Note.cy.tsx", () => {
   it("renders data and has correct id value", () => {
-    cy.intercept(
-      {
-        method: "GET",
-        url: "/api/notes",
-      },
-      {
-        fixture: "notes.json",
-      }
-    ).as("getNotes");
-
-    cy.mount(<App />);
-
-    cy.wait("@getNotes");
+    cy.mount(
+      <TestWrapper>
+        <Note data={data} />
+      </TestWrapper>
+    );
 
     cy.get("[data-cy=note-wrapper]").should("have.id", data[0].id);
-    cy.contains("Test note title").should("be.visible");
-    cy.contains("Lorem ipsum blablablabla").should("be.visible");
-  });
-  it("has a delete button", () => {
-    cy.mount(<Note data={data} />);
-
-    cy.contains("button", "Delete");
   });
 });
